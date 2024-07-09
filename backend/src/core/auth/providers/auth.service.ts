@@ -27,6 +27,11 @@ export class AuthService {
   ): Promise<{ accessToken: string }> {
     const { password } = createUserDto;
     const plainToHash = await hash(password, 10);
+    if (!createUserDto.role) {
+      createUserDto.role = await this.roleRepository.findOneBy({
+        name: 'USER',
+      });
+    }
     const user = this.userRepository.create({
       ...createUserDto,
       password: plainToHash,
@@ -42,14 +47,16 @@ export class AuthService {
     const { usernameOrEmail, password } = loginDto;
     const user = await this.userRepository.findOne({
       where: [{ name: usernameOrEmail }, { email: usernameOrEmail }],
+      relations: ['role'],
     });
 
     if (user && (await compare(password, user.password))) {
       const payload = {
         name: user.name,
-        id: user.id,
-        role: user.role,
+        sub: user.id,
+        role: user.role.name,
       };
+      console.log(payload);
       const accessToken = this.jwtService.sign(payload);
       return { accessToken };
     } else {

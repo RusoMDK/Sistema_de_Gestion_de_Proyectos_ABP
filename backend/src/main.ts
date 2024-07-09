@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AppDataSource } from './core/config/data-source';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   await AppDataSource.initialize()
@@ -12,6 +13,8 @@ async function bootstrap() {
     });
   const app = await NestFactory.create(AppModule, { cors: true });
   await app.startAllMicroservices();
+  //utilizado para realizar validaciones globales con las biblitoecas class-validator y class-transformer
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
 

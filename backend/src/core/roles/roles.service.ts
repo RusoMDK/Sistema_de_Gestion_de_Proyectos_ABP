@@ -12,8 +12,8 @@ export class RolesService {
     private readonly rolesRepository: Repository<Role>,
   ) {}
   create(createRoleDto: CreateRoleDto) {
-    this.rolesRepository.create(createRoleDto);
-    return this.rolesRepository.save(createRoleDto);
+    const createdRole = this.rolesRepository.create(createRoleDto);
+    return this.rolesRepository.save(createdRole);
   }
 
   findAll() {

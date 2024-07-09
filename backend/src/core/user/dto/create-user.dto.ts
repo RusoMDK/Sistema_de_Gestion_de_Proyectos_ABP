@@ -3,7 +3,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsStrongPassword,
+  // IsStrongPassword,
 } from 'class-validator';
 import { Role } from 'src/core/models/public';
 
@@ -21,7 +21,7 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @IsStrongPassword()
+  // @IsStrongPassword()
   @IsNotEmpty()
   password: string;
 

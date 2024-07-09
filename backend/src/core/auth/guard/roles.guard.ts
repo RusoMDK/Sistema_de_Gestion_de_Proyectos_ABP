@@ -28,6 +28,7 @@ export class RolesGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    console.log('role guard');
     const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -41,26 +42,29 @@ export class RolesGuard implements CanActivate {
     const authHeader = request.headers.authorization;
 
     if (!authHeader) {
-      throw new UnauthorizedException('Authorization header not found');
+      throw new UnauthorizedException('Header de autorización no econtrado');
     }
 
     const token = authHeader.split(' ')[1];
     if (!token) {
-      throw new UnauthorizedException('Token not found');
+      throw new UnauthorizedException('Token de autorización no econtrado');
     }
 
     try {
       const secret = this.configService.get<string>('JWT_SECRET');
+      console.log(secret);
       const decoded = jwt.verify(token, secret) as JwtPayload;
+      console.log(decoded);
+
       request.user = decoded;
 
       if (!decoded.role) {
-        throw new UnauthorizedException('Role not found in token');
+        throw new UnauthorizedException('Rol no encontrado en el token');
       }
 
       return requiredRoles.includes(decoded.role);
     } catch (err) {
-      throw new UnauthorizedException('Invalid token');
+      throw new UnauthorizedException('Token no válido');
     }
   }
 }

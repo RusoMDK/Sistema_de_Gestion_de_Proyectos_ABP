@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminModule } from './core/admin/admin.module';
 import { AppDataSource } from './core/config/data-source';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { AppDataSource } from './core/config/data-source';
     JwtModule.register({
       global: true,
     }),
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
