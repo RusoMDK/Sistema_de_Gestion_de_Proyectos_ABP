@@ -22,6 +22,7 @@ export class CommunityWork {
   @ManyToOne(() => Project, (project) => project.community_work, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   project: Project;
 }

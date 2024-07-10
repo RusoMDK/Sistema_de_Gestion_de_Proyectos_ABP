@@ -22,6 +22,7 @@ export class Reunion {
   @ManyToOne(() => Event, (event) => event.reunion, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   event: Event;
 }

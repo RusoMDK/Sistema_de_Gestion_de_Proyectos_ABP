@@ -22,6 +22,7 @@ export class CommunityDevelopment {
   @ManyToOne(() => Event, (event) => event.community_development, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   event: Event;
 }

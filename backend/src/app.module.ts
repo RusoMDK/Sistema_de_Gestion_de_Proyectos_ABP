@@ -9,7 +9,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminModule } from './core/admin/admin.module';
 import { AppDataSource } from './core/config/data-source';
-import { ProjectModule } from './project/project.module';
+import {
+  ActivityModule,
+  EventModule,
+  MemberModule,
+  ProjectModule,
+  TaskModule,
+} from './modules';
 
 @Module({
   imports: [
@@ -39,10 +45,14 @@ import { ProjectModule } from './project/project.module';
     AuthModule,
     RolesModule,
     AdminModule,
+    ActivityModule,
+    EventModule,
+    MemberModule,
+    ProjectModule,
+    TaskModule,
     JwtModule.register({
       global: true,
     }),
-    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],

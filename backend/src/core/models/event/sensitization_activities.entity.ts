@@ -22,6 +22,7 @@ export class SensitizationActivities {
   @ManyToOne(() => Event, (event) => event.sensitization_activities, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   event: Event;
 }

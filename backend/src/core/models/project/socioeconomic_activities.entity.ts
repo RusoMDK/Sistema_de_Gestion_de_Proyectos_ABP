@@ -22,6 +22,7 @@ export class SocioeconomicActivities {
   @ManyToOne(() => Project, (project) => project.socioeconomic_activities, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   project: Project;
 }

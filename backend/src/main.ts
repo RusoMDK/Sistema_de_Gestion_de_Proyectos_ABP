@@ -14,7 +14,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   await app.startAllMicroservices();
   //utilizado para realizar validaciones globales con las biblitoecas class-validator y class-transformer
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
+  );
   await app.listen(3000);
 }
 

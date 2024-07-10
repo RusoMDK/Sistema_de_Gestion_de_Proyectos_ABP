@@ -22,6 +22,7 @@ export class TrainingCourse {
   @ManyToOne(() => Project, (project) => project.training_course, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   project: Project;
 }

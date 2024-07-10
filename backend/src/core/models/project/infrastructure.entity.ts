@@ -22,6 +22,7 @@ export class Infrastructure {
   @ManyToOne(() => Project, (project) => project.infrastructure, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    eager: true,
   })
   project: Project;
 }
