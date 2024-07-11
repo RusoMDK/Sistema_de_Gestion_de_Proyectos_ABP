@@ -49,7 +49,7 @@ export class ResourceService {
   async remove(id: string) {
     const result = await this.resourceRepository.delete(id);
     if (result.affected === 0) {
-      throw new NotFoundException('Proyecto no encontrado');
+      throw new NotFoundException('Recurso no encontrado');
     }
     return result;
   }

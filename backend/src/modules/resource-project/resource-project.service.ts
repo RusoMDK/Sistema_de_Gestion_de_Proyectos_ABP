@@ -56,14 +56,14 @@ export class ResourceProjectService {
 
   async findOne(id: string, query: FindOptionsDto) {
     const findOptions = this.verifyFindOptions(query);
-    const resource = await this.resourceProjectRepository.findOne({
+    const resourceProject = await this.resourceProjectRepository.findOne({
       where: { id },
       relations: findOptions?.relations || [],
     });
-    if (!resource) {
-      throw new NotFoundException('Proyecto no encontrado');
+    if (!resourceProject) {
+      throw new NotFoundException('Recurso en proyecto no encontrado');
     }
-    return resource;
+    return resourceProject;
   }
 
   async update(id: string, updateResourceProjectDto: UpdateResourceProjectDto) {

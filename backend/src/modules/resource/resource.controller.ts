@@ -48,6 +48,12 @@ export class ResourceController {
 
   @Get(':id')
   @UseGuards(CustomAuthGuard)
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
   findOne(@Param('id') id: string, @Query() query?: FindOptionsDto) {
     return this.resourceService.findOne(id, query);
   }
