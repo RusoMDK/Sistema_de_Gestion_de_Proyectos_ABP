@@ -7,20 +7,21 @@ import {
   Param,
   Delete,
   UseGuards,
-  ValidationPipe,
   UsePipes,
+  ValidationPipe,
   Query,
 } from '@nestjs/common';
-import { ResourceService } from './resource.service';
-import { CreateResourceDto } from './dto/create-resource.dto';
-import { UpdateResourceDto } from './dto/update-resource.dto';
-
-import { FindOptionsDto } from './dto/find-options.dto';
+import { ResourceProjectService } from './resource-project.service';
+import { CreateResourceProjectDto } from './dto/create-resource-project.dto';
+import { UpdateResourceProjectDto } from './dto/update-resource-project.dto';
 import { AuthGuard } from 'src/core/auth/guard/auth.guard';
+import { FindOptionsDto } from './dto/find-options.dto';
 
-@Controller('resource')
-export class ResourceController {
-  constructor(private readonly resourceService: ResourceService) {}
+@Controller('resource-project')
+export class ResourceProjectController {
+  constructor(
+    private readonly resourceProjectService: ResourceProjectService,
+  ) {}
 
   @Post()
   @UseGuards(AuthGuard)
@@ -30,8 +31,8 @@ export class ResourceController {
       forbidNonWhitelisted: true,
     }),
   )
-  create(@Body() createResourceDto: CreateResourceDto) {
-    return this.resourceService.create(createResourceDto);
+  create(@Body() createResourceProjectDto: CreateResourceProjectDto) {
+    return this.resourceProjectService.create(createResourceProjectDto);
   }
 
   @Get()
@@ -43,13 +44,13 @@ export class ResourceController {
     }),
   )
   findAll(@Query() query?: FindOptionsDto) {
-    return this.resourceService.findAll(query);
+    return this.resourceProjectService.findAll(query);
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
   findOne(@Param('id') id: string, @Query() query?: FindOptionsDto) {
-    return this.resourceService.findOne(id, query);
+    return this.resourceProjectService.findOne(id, query);
   }
 
   @Patch(':id')
@@ -62,14 +63,14 @@ export class ResourceController {
   )
   update(
     @Param('id') id: string,
-    @Body() updateResourceDto: UpdateResourceDto,
+    @Body() updateResourceProjectDto: UpdateResourceProjectDto,
   ) {
-    return this.resourceService.update(id, updateResourceDto);
+    return this.resourceProjectService.update(id, updateResourceProjectDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
-    return this.resourceService.remove(id);
+    return this.resourceProjectService.remove(id);
   }
 }

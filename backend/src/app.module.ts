@@ -14,8 +14,10 @@ import {
   EventModule,
   MemberModule,
   ProjectModule,
+  ResourceProjectModule,
   TaskModule,
 } from './modules';
+import { ResourceModule } from './modules/resource/resource.module';
 
 @Module({
   imports: [
@@ -50,9 +52,12 @@ import {
     MemberModule,
     ProjectModule,
     TaskModule,
+    ResourceProjectModule,
+    ResourceModule,
     JwtModule.register({
       global: true,
     }),
+    ResourceProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],

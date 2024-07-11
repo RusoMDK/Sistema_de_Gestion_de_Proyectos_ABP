@@ -5,11 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  Unique,
 } from 'typeorm';
 
 import { Project, Resource } from '.';
 
 @Entity()
+@Unique(['project', 'resource']) // restriccion para que no se repita asociacion entre el mismo resource y project
 export class Resource_Project {
   @PrimaryGeneratedColumn('uuid')
   id: string;
