@@ -15,7 +15,7 @@ import {
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { AuthGuard } from 'src/core/auth/guard/auth.guard';
+import { CustomAuthGuard } from 'src/core/auth/guard/auth.guard';
 import { FindOptionsDto } from './dto/find-options.dto';
 
 @Controller('project')
@@ -23,7 +23,7 @@ export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,

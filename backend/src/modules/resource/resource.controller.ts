@@ -16,14 +16,14 @@ import { CreateResourceDto } from './dto/create-resource.dto';
 import { UpdateResourceDto } from './dto/update-resource.dto';
 
 import { FindOptionsDto } from './dto/find-options.dto';
-import { AuthGuard } from 'src/core/auth/guard/auth.guard';
+import { CustomAuthGuard } from 'src/core/auth/guard/auth.guard';
 
 @Controller('resource')
 export class ResourceController {
   constructor(private readonly resourceService: ResourceService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,
@@ -35,7 +35,7 @@ export class ResourceController {
   }
 
   @Get()
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,
@@ -47,13 +47,13 @@ export class ResourceController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   findOne(@Param('id') id: string, @Query() query?: FindOptionsDto) {
     return this.resourceService.findOne(id, query);
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,
@@ -68,7 +68,7 @@ export class ResourceController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   remove(@Param('id') id: string) {
     return this.resourceService.remove(id);
   }

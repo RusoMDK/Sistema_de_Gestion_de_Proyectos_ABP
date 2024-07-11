@@ -14,7 +14,7 @@ import {
 import { ResourceProjectService } from './resource-project.service';
 import { CreateResourceProjectDto } from './dto/create-resource-project.dto';
 import { UpdateResourceProjectDto } from './dto/update-resource-project.dto';
-import { AuthGuard } from 'src/core/auth/guard/auth.guard';
+import { CustomAuthGuard } from 'src/core/auth/guard/auth.guard';
 import { FindOptionsDto } from './dto/find-options.dto';
 
 @Controller('resource-project')
@@ -24,7 +24,7 @@ export class ResourceProjectController {
   ) {}
 
   @Post()
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,
@@ -36,7 +36,7 @@ export class ResourceProjectController {
   }
 
   @Get()
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,
@@ -48,13 +48,13 @@ export class ResourceProjectController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   findOne(@Param('id') id: string, @Query() query?: FindOptionsDto) {
     return this.resourceProjectService.findOne(id, query);
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: true,
@@ -69,7 +69,7 @@ export class ResourceProjectController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard)
+  @UseGuards(CustomAuthGuard)
   remove(@Param('id') id: string) {
     return this.resourceProjectService.remove(id);
   }

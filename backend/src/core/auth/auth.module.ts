@@ -7,7 +7,7 @@ import { UserModule } from '../user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './providers/auth.service';
-import { jwtConfig } from 'config/jwt.config';
+import { jwtConfig } from 'src/core/config/jwt.config';
 import { Role, User } from '../models/public';
 
 @Module({
