@@ -12,13 +12,13 @@ import { AppDataSource } from './core/config/data-source';
 import {
   ActivityModule,
   EventModule,
+  MemberActivityModule,
   MemberModule,
   ProjectModule,
+  ResourceModule,
   ResourceProjectModule,
   TaskModule,
 } from './modules';
-import { ResourceModule } from './modules/resource/resource.module';
-import { MemberActivityModule } from './modules/member-activity/member-activity.module';
 
 @Module({
   imports: [
