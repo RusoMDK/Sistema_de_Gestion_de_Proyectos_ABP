@@ -25,25 +25,10 @@ import {
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    JwtModule.register({
+      global: true,
+    }),
     TypeOrmModule.forRoot(AppDataSource.options),
-    // TypeOrmModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   inject: [ConfigService],
-    //   useFactory: (configService: ConfigService) => ({
-    //     type: 'postgres',
-    //     host: configService.get<string>('DB_HOST'),
-    //     port: configService.get<number>('DB_PORT'),
-    //     username: configService.get<string>('DB_USERNAME'),
-    //     password: configService.get<string>('DB_PASSWORD'),
-    //     database: configService.get<string>('DB_NAME'),
-    //     entities: [__dirname + '/core/models/**/*.entity{.ts,.js}'],
-    //     synchronize: false,
-    //     migrations: [__dirname + '/core/migrations/*{.ts,.js}'],
-    //     cli: {
-    //       migrationsDir: 'src/migrations',
-    //     },
-    //   }),
-    // }),
     UserModule,
     AuthModule,
     RolesModule,
@@ -55,9 +40,6 @@ import {
     TaskModule,
     ResourceProjectModule,
     ResourceModule,
-    JwtModule.register({
-      global: true,
-    }),
     ResourceProjectModule,
     MemberActivityModule,
   ],

@@ -1,34 +1,89 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  // Patch,
+  Param,
+  Delete,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+  Query,
+} from '@nestjs/common';
 import { ProjectInfrastructureService } from './project_infrastructure.service';
 import { CreateProjectInfrastructureDto } from './dto/create-project_infrastructure.dto';
-import { UpdateProjectInfrastructureDto } from './dto/update-project_infrastructure.dto';
+import { CustomAuthGuard } from 'src/core/auth/guard/auth.guard';
+import { FindOptionsDto } from './dto/find-options.dto';
+// import { UpdateProjectInfrastructureDto } from './dto/update-project_infrastructure.dto';
 
 @Controller('project-infrastructure')
 export class ProjectInfrastructureController {
-  constructor(private readonly projectInfrastructureService: ProjectInfrastructureService) {}
+  constructor(
+    private readonly projectInfrastructureService: ProjectInfrastructureService,
+  ) {}
 
   @Post()
-  create(@Body() createProjectInfrastructureDto: CreateProjectInfrastructureDto) {
-    return this.projectInfrastructureService.create(createProjectInfrastructureDto);
+  @UseGuards(CustomAuthGuard)
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
+  create(
+    @Body() createProjectInfrastructureDto: CreateProjectInfrastructureDto,
+  ) {
+    return this.projectInfrastructureService.create(
+      createProjectInfrastructureDto,
+    );
   }
 
   @Get()
-  findAll() {
-    return this.projectInfrastructureService.findAll();
+  @UseGuards(CustomAuthGuard)
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
+  findAll(@Query() query?: FindOptionsDto) {
+    console.log('entrando');
+    return this.projectInfrastructureService.findAll(query);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectInfrastructureService.findOne(+id);
+  @UseGuards(CustomAuthGuard)
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
+  findOne(@Param('id') id: string, @Query() query?: FindOptionsDto) {
+    return this.projectInfrastructureService.findOne(id, query);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProjectInfrastructureDto: UpdateProjectInfrastructureDto) {
-    return this.projectInfrastructureService.update(+id, updateProjectInfrastructureDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateProjectInfrastructureDto: UpdateProjectInfrastructureDto,
+  // ) {
+  //   return this.projectInfrastructureService.update(
+  //     +id,
+  //     updateProjectInfrastructureDto,
+  //   );
+  // }
 
   @Delete(':id')
+  @UseGuards(CustomAuthGuard)
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  )
   remove(@Param('id') id: string) {
-    return this.projectInfrastructureService.remove(+id);
+    return this.projectInfrastructureService.remove(id);
   }
 }

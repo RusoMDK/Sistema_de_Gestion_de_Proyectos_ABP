@@ -66,7 +66,7 @@ export class MemberActivityService {
   //   return `This action updates a #${id} memberActivity`;
   // }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const result = await this.memberActivityRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException('Recurso en el proyecto no encontrado');
