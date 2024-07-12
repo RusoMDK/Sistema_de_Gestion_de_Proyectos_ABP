@@ -28,7 +28,9 @@ export class MemberService {
     const member = new Member();
     member.project = project;
     member.name = createMemberDto.name;
-    member.ocupation = createMemberDto.ocupation;
+    member.ocupation = createMemberDto.ocupation
+      ? createMemberDto.ocupation
+      : null;
     member.last_name = createMemberDto.last_name;
 
     return this.memberRepository.save(member);

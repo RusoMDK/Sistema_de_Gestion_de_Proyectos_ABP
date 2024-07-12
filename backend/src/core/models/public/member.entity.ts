@@ -27,8 +27,8 @@ export class Member {
   @Column()
   last_name: string;
 
-  @Column()
-  ocupation: string;
+  @Column({ nullable: true })
+  ocupation: string | null;
 
   @ManyToOne(() => Project, (project) => project.member)
   project: Project;

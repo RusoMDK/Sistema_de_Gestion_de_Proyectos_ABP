@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateMemberDto {
   @IsNotEmpty()
@@ -8,9 +8,10 @@ export class CreateMemberDto {
   @IsString()
   last_name: string;
 
+  @IsOptional()
   @IsNotEmpty()
   @IsString()
-  ocupation: string;
+  ocupation?: string;
 
   @IsNotEmpty()
   @IsString()
