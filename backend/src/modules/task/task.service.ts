@@ -49,7 +49,7 @@ export class TaskService {
       relations: findOptions?.relations || [],
     });
     if (!resource) {
-      throw new NotFoundException('Proyecto no encontrado');
+      throw new NotFoundException('Tarea no encontrada');
     }
     return resource;
   }
@@ -57,7 +57,7 @@ export class TaskService {
   async update(id: string, updateTaskDto: UpdateTaskDto) {
     const result = await this.taskRepository.findOneBy({ id });
     if (!result) {
-      throw new NotFoundException('Recurso en el proyecto no encontrado');
+      throw new NotFoundException('Tarea en el proyecto no encontrada');
     }
 
     if (updateTaskDto.name) {
@@ -75,7 +75,7 @@ export class TaskService {
   async remove(id: string) {
     const result = await this.taskRepository.delete(id);
     if (result.affected === 0) {
-      throw new NotFoundException('Proyecto no encontrado');
+      throw new NotFoundException('Tarea no encontrado');
     }
     return result;
   }

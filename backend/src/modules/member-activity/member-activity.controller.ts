@@ -11,15 +11,15 @@ import {
   ValidationPipe,
   Query,
 } from '@nestjs/common';
-import { ActivityService } from './activity.service';
-import { CreateActivityDto } from './dto/create-activity.dto';
-import { UpdateActivityDto } from './dto/update-activity.dto';
+import { MemberActivityService } from './member-activity.service';
+import { CreateMemberActivityDto } from './dto/create-member-activity.dto';
+// import { UpdateMemberActivityDto } from './dto/update-member-activity.dto';
 import { CustomAuthGuard } from 'src/core/auth/guard/auth.guard';
 import { FindOptionsDto } from './dto/find-options.dto';
 
-@Controller('activity')
-export class ActivityController {
-  constructor(private readonly activityService: ActivityService) {}
+@Controller('member-activity')
+export class MemberActivityController {
+  constructor(private readonly memberActivityService: MemberActivityService) {}
 
   @Post()
   @UseGuards(CustomAuthGuard)
@@ -29,8 +29,8 @@ export class ActivityController {
       forbidNonWhitelisted: true,
     }),
   )
-  create(@Body() createActivityDto: CreateActivityDto) {
-    return this.activityService.create(createActivityDto);
+  create(@Body() createMemberActivityDto: CreateMemberActivityDto) {
+    return this.memberActivityService.create(createMemberActivityDto);
   }
 
   @Get()
@@ -42,7 +42,7 @@ export class ActivityController {
     }),
   )
   findAll(@Query() query?: FindOptionsDto) {
-    return this.activityService.findAll(query);
+    return this.memberActivityService.findAll(query);
   }
 
   @Get(':id')
@@ -54,23 +54,20 @@ export class ActivityController {
     }),
   )
   findOne(@Param('id') id: string, @Query() query?: FindOptionsDto) {
-    return this.activityService.findOne(id, query);
+    return this.memberActivityService.findOne(id, query);
   }
 
-  @Patch(':id')
-  @UseGuards(CustomAuthGuard)
-  @UsePipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  )
-  update(
-    @Param('id') id: string,
-    @Body() updateActivityDto: UpdateActivityDto,
-  ) {
-    return this.activityService.update(id, updateActivityDto);
-  }
+  // @Patch(':id')
+  // @UseGuards(CustomAuthGuard)
+  // @UsePipes(
+  //   new ValidationPipe({
+  //     whitelist: true,
+  //     forbidNonWhitelisted: true,
+  //   }),
+  // )
+  // update(@Param('id') id: string, @Body() updateMemberActivityDto: UpdateMemberActivityDto) {
+  //   return this.memberActivityService.update(+id, updateMemberActivityDto);
+  // }
 
   @Delete(':id')
   @UseGuards(CustomAuthGuard)
@@ -81,6 +78,6 @@ export class ActivityController {
     }),
   )
   remove(@Param('id') id: string) {
-    return this.activityService.remove(id);
+    return this.memberActivityService.remove(id);
   }
 }

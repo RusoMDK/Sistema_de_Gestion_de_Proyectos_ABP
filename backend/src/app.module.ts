@@ -18,6 +18,7 @@ import {
   TaskModule,
 } from './modules';
 import { ResourceModule } from './modules/resource/resource.module';
+import { MemberActivityModule } from './modules/member-activity/member-activity.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { ResourceModule } from './modules/resource/resource.module';
       global: true,
     }),
     ResourceProjectModule,
+    MemberActivityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

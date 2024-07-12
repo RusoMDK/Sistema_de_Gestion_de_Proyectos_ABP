@@ -6,7 +6,7 @@ export class FindOptionsDto {
   @ValidateIf(
     (o) => typeof o.relations === 'string' || Array.isArray(o.relations),
   )
-  @IsIn(['project', 'member_acitivity'], { each: true })
+  @IsIn(['task', 'member_acitivity'], { each: true })
   @Type(() => String)
   relations?: string[];
 }
