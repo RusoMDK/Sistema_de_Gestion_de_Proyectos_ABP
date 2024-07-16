@@ -18,6 +18,7 @@ import {
   ResourceModule,
   ResourceProjectModule,
   TaskModule,
+  ReportsModule,
 } from './modules';
 
 @Module({
@@ -42,6 +43,7 @@ import {
     ResourceModule,
     ResourceProjectModule,
     MemberActivityModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

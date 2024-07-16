@@ -6,3 +6,4 @@ export * from './project/project.module';
 export * from './resource/resource.module';
 export * from './resource-project/resource-project.module';
 export * from './task/task.module';
+export * from './reports/reports.module';
