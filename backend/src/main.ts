@@ -4,6 +4,7 @@ import { AppDataSource } from './core/config/data-source';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  console.log(process.env.LOGNAME);
   await AppDataSource.initialize()
     .then(() => {
       console.log('DataSource inicializado');

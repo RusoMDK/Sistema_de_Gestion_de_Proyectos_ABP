@@ -38,7 +38,7 @@ export class AuthService {
     });
     await this.userRepository.save(user);
 
-    const payload = { name: user.name, sub: user.id, role: user.role };
+    const payload = { name: user.name, sub: user.id, role: user.role.name };
     const accessToken = this.jwtService.sign(payload);
     return { accessToken };
   }

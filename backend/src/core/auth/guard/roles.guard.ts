@@ -6,15 +6,15 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
-import { Role } from '../enum/roles.enum';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { ROLES_KEY } from 'src/core/function/GlobalFunctions';
+import { RoleName } from 'src/core/roles/enum/roles.enum';
 
 interface JwtPayload {
   id: number;
   name: string;
-  role: Role;
+  role: RoleName;
   // otros campos si los tienes
 }
 
@@ -28,10 +28,10 @@ export class RolesGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const requiredRoles = this.reflector.getAllAndOverride<RoleName[]>(
+      ROLES_KEY,
+      [context.getHandler(), context.getClass()],
+    );
 
     if (!requiredRoles) {
       return true;
@@ -58,7 +58,6 @@ export class RolesGuard implements CanActivate {
       if (!decoded.role) {
         throw new UnauthorizedException('Rol no encontrado en el token');
       }
-
       return requiredRoles.includes(decoded.role);
     } catch (err) {
       throw new UnauthorizedException('Token no válido');

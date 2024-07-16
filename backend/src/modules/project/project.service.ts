@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { Project, User } from 'src/core/models/public';
@@ -13,14 +17,20 @@ export class ProjectService {
     private readonly projectRepository: Repository<Project>,
   ) {}
 
-  create(createProjectDto: CreateProjectDto, req: Request) {
-    if (!createProjectDto.author_name) {
-      createProjectDto.author_name = req['user'].name;
-    }
-    const project = this.projectRepository.create(createProjectDto);
-    project.user = { id: req['user'].sub } as User;
+  async create(createProjectDto: CreateProjectDto, req: Request) {
+    try {
+      console.log(createProjectDto.description);
+      if (!createProjectDto.author_name) {
+        createProjectDto.author_name = req['user'].name;
+      }
+      const project = this.projectRepository.create(createProjectDto);
+      project.user = { id: req['user'].sub } as User;
 
-    return this.projectRepository.save(project);
+      return await this.projectRepository.save(project);
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error.driverError.detail);
+    }
   }
 
   async findAll(query: FindOptionsDto) {
