@@ -1,0 +1,42 @@
+<nz-header class="custom-header">
+  <div class="container">
+    <div class="header-content">
+      <button class="button-menu" nz-button nzType="text" (click)="isCollapsedMethod()">
+        <i class="bi" [class.bi-list]="!isCollapsed" [class.bi-x]="isCollapsed"></i>
+      </button>
+      <h1 class="header-title">Sistema de Recolección, Almacenamiento y Visualización de Parámetros de Pruebas de Dispositivos Físicos</h1>
+      <div class="menu-login">
+        <a nz-tooltip [nzTooltipArrowPointAtCenter]="true" [nzTooltipTrigger]="'click'" [nzTooltipPlacement]="'bottomLeft'" [nzTooltipTitle]="userTemplate" style="color: white">
+          <nz-avatar nzSrc="../../../assets/default-avatar.png" nzSize="large" class="user-avatar"></nz-avatar>
+          <span class="userName-user">{{ userName || 'Nombre de Usuario' }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nz-header>
+
+<ng-template #userTemplate>
+  <nz-card [nzCover]="coverTemplate" [nzActions]="[actionPerfil, actionSalir]">
+    <div class="user-card-content">
+      <nz-avatar nzSrc="../../../assets/default-avatar.png" nzSize="large" class="user-avatar"></nz-avatar>
+      <br />
+      {{ userName || 'Nombre de Usuario' }}
+      <br />
+      <small>Miembro desde {{ userTime || 'hace mucho tiempo' }}</small>
+    </div>
+  </nz-card>
+</ng-template>
+
+<ng-template #coverTemplate></ng-template>
+
+<ng-template #actionPerfil>
+  <button nz-button nzType="default" routerLink="/">
+    <i class="bi bi-person"></i> Perfil
+  </button>
+</ng-template>
+
+<ng-template #actionSalir>
+  <button nz-button nzType="default" class="gray-2" (click)="logout()">
+    <i class="bi bi-box-arrow-right"></i> Salir
+  </button>
+</ng-template>

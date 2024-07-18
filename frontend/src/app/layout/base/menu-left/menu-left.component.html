@@ -1,0 +1,48 @@
+<nz-tabset class="custom-tabset">
+  <nz-tab>
+    <ul nz-menu nzMode="inline" class="custom-menu">
+      <h3 class="titulo-menu">
+        <span class="icon bi bi-house"></span> Menú Principal
+      </h3>
+      <div *ngFor="let menuItem of organizationTab" class="menu-item-container">
+        <ng-container *ngIf="menuItem.sub_menus.length > 0; else emptySubMenuOrganization">
+          <li 
+            nz-submenu
+            [nzTitle]="menuItem.name"
+            [(nzOpen)]="menuItem.open"
+            (nzOpenChange)="clickSingle(organizationTab, menuItem)"
+            [nzDisabled]="menuItem.disabled"
+            class="menu-item"
+          >
+            <ul *ngIf="menuItem.sub_menus.length !== 0">
+              <li
+                aria-disabled="true"
+                nz-menu-item
+                *ngFor="let subItem of menuItem.sub_menus"
+                [nzDisabled]="!subItem.url"
+                [routerLink]="menuItem.domain + '/' + subItem.url"
+                [nzMatchRouter]="true"
+                class="submenu-item"
+              >
+                <span class="submenu-icon bi" [class.bi-experiment]="subItem.icon === 'experiment'" [class.bi-question-circle]="!subItem.icon"></span>
+                {{ subItem.name }}
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+        <ng-template #emptySubMenuOrganization>
+          <li
+            aria-disabled="true"
+            nz-menu-item
+            [routerLink]="menuItem.domain"
+            [nzMatchRouter]="true"
+            class="menu-item"
+          >
+            <span class="menu-icon bi" [class.bi-experiment]="menuItem.icon === 'experiment'" [class.bi-question-circle]="!menuItem.icon"></span>
+            {{ menuItem.name }}
+          </li>
+        </ng-template>
+      </div>
+    </ul>
+  </nz-tab>
+</nz-tabset>

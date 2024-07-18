@@ -1,0 +1,94 @@
+.custom-header {
+  background-color: #202020;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 4.5rem; // Aumentamos la altura del header
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .button-menu {
+    background-color: transparent;
+    border: none;
+    color: #a6ce39;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    i {
+      font-size: 1.8em;
+    }
+  }
+
+  .header-title {
+    color: #a6ce39; // Cambiamos el color del título a verde
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+    margin: 0 20px;
+  }
+
+  .menu-login {
+    display: flex;
+    align-items: center;
+
+    .user-avatar {
+      margin-right: 10px;
+    }
+
+    .userName-user {
+      color: #a6ce39; // Cambiamos el color del nombre de usuario a verde
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+  }
+}
+
+// Estilos específicos para el avatar y el menú del usuario
+.nz-tooltip {
+  .nz-card {
+    background-color: #202020;
+    color: #ffffff;
+    border: none;
+
+    .user-card-content {
+      text-align: center;
+      color: #ffffff;
+
+      .user-avatar {
+        margin-bottom: 10px;
+      }
+
+      small {
+        color: #a6ce39;
+      }
+    }
+
+    .gray-2 {
+      color: #ffffff;
+      background-color: #444444;
+      border: none;
+
+      &:hover {
+        background-color: #a6ce39;
+        color: #202020;
+      }
+    }
+  }
+}

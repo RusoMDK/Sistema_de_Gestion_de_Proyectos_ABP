@@ -1,0 +1,10 @@
+nz-sider {
+    background-color: #202020 !important; // Asegura que el fondo sea el mismo que el menú izquierdo
+    height: auto;
+    overflow: hidden;
+    z-index: 2; // Asegura que esté por encima del texto "Menú Principal"
+}
+
+.nz-tabs-nav{
+    display: none;
+  }
